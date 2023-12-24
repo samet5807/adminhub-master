@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Boxicons -->
+	 <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+	<!-- or -->
+	<link rel="stylesheet"
+	href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  </head>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="/style.css">
+
+	<title>TESLA</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+		/* Eklediğim yeni stil kuralları */
+		#svg-turkiye-haritasi {
+		  position: relative;
+		  width: 100%; /* Türkiye haritasının genişliğini ayarlayın */
+		  height: 500px; /* Türkiye haritasının yüksekliğini ayarlayın */
+		}
+	  </style>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			
+			
+			<span class="text">TESLA</span>
+			<img src="./logo.png " width="50" height="70" />
+		</a>
+		
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">YÖNETİM PANELİ</span>
+				</a>
+			</li>
+			
+			<li id = "istasyonlarMenu">
+				<a href="">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">İSTASYONLAR</span>
+				</a>
+				
+			</li>
+			<li>
+				<a href="">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">GRAFİKLER</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Üniteler</span>
+				</a>
+			</li>
+			<li>
+				<a href="/analiz">
+					<i class='bx bxs-group' ></i>
+					<span class="text">ANALİZ</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+		
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">ÇIKIŞ</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
+			<a href="#" class="profile">
+				<img src="img/people.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+    
+		<!-- Sadece "Yönetim Paneli" seçiliyken göster -->
+		<div id="dashboard-content">
+    <div class="head-title">
+        <div class="left">
+            <h1>LİSTE</h1>
+            
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">İSTASYONLAR</a>
+                </li>
+                <li><i class='bx bx-chevron-right' ></i></li>
+                <li>
+                    <a class="active" href="#">İSTASYONLAR</a>
+                </li>
+            </ul>
+        </div>
+        <a href="#" class="btn-download">
+            <i class='bx bxs-cloud-download' ></i>
+            <span class="text">YENİLE</span>
+        </a>
+    </div>
+
+    <ul class="box-info">
+        <li>
+            <i class='bx bxs-car' ></i>
+            <span class="text">
+                <h3>1020</h3>
+                <p>Araç Sayısı</p>
+            </span>
+        </li>
+        <li>
+            <i class='bx bxs-ev-station' ></i>
+            <span class="text">
+                <h3>2834</h3>
+                <p>İstasyonlar</p>
+            </span>
+        </li>
+        <li>
+            <i class='bx bxs-cloud-lightning' ></i>
+            <span class="text">
+                <h3 id="enerji-tuketimi">0</h3>
+                <p>kw</p>
+            </span>
+        </li>
+    </ul>
+
+    <div class="table-data">
+		<div class="order">
+			<div class="head">
+				<h3>İLLERE GÖRE İSTASYONLAR</h3>
+				
+			</div>
+		</div>
+		<div class="todo">
+			<div class="head">
+				<h3>EN ÇOK TÜKETİMİ OLAN İSTASYONLAR</h3>
+				
+			</div>
+
+			<div class="head">
+				<h3>EN ÇOK ARIZA VEREN İSTASYONLAR</h3>
+				
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+	</main>
+		<!-- MAIN -->
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // switch-mode elementini kontrol et
+            const switchMode = document.getElementById('switch-mode');
+        
+            // varsayılan olarak dark modunu kontrol et ve sınıfı ekle
+            const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDarkMode) {
+                document.body.classList.add('dark');
+                switchMode.checked = true; // Anahtarı güncelle
+            }
+        
+            // change olayını dinle
+            switchMode.addEventListener('change', function () {
+                if (this.checked) {
+                    document.body.classList.add('dark');
+                } else {
+                    document.body.classList.remove('dark');
+                }
+            });
+        });
+        </script>
+
+
+	<script src="script.js"></script>
+	
+	
+	
+
+</body>
+</html>
